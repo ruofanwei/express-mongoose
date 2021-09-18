@@ -1,22 +1,30 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const {MONGO_URL} = require('./config.js')
 
-// Routes
-const userRoutes = require('./routes/user')
 // set up our express app
 const app = express();
 
 // BodyParser Middleware
 app.use(express.json())
 
-// connect to mongodb
-mongoose.connect(MONGO_URL)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err))
-mongoose.Promise = global.Promise;
+// * connect to mongodb
+const options = {
+  logger: console.log,
+  loggerLevel: "info",
+}
+mongoose
+  .connect(
+    "mongodb+srv://ruofan:xxxxxx@cluster0.dhldb.mongodb.net/booking",
+    options
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(`${err}`));
+mongoose.Promise = global.Promise
+mongoose.set("debug", true)
 
-app.use("/", userRoutes);
+// Routes
+const storeRouter = require("./routes/stores");
+app.use("/", storeRouter);
 
 // error handling middleware
 app.use(function (err, req, res, next) {

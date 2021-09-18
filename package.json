@@ -11,7 +11,11 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.5",
-    "short-uuid": "^4.2.0"
+    "short-uuid": "^4.2.0",
+    "moment": "^2.29.1",
+    "moment-range": "^4.0.2",
+    "winston": "^3.3.3",
+    "express-validator": "^6.9.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

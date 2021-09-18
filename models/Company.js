@@ -1,28 +1,37 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const short = require("short-uuid");
-// define a schema
-const CompanySchema = new Schema({
-  uuid: {
-    type: String,
-    required: true,
-    default: function () {
-      return short.generate();
-    },
-  },
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  // one company can have many stores
-  stores: [
-    {
+
+// * company schema
+const CompanySchema = new Schema(
+  {
+    uuid: {
       type: Schema.Types.ObjectId,
-      ref: "Store",
+      index: true,
+      unique: true,
+      required: [true, "uuid is required"],
+      auto: true,
     },
-  ],
-});
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    // one company can have many stores
+    stores: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Store",
+      },
+    ],
+    deletedAt: {
+      type: Date,
+      default: null,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // compile model
 module.exports = mongoose.model("Company", CompanySchema);
