@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FeaturesSchema = new Schema({
+  _id: false,
   calendar: {
     tabs: {
       type: [String],

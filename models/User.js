@@ -20,11 +20,13 @@ const UserSchema = new Schema(
     phone: {
       type: String,
     },
-    photo_url: {
+    photoUrl: {
       type: String,
+      default: null,
     },
     intro: {
       type: String,
+      default: null,
     },
     lastLoginAt: {
       type: Date,

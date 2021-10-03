@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -5,20 +6,13 @@ const mongoose = require("mongoose");
 const app = express();
 
 // BodyParser Middleware
-app.use(express.json())
+app.use(express.json());
 
 // * connect to mongodb
-const options = {
-  logger: console.log,
-  loggerLevel: "info",
-}
 mongoose
-  .connect(
-    "mongodb+srv://ruofan:xxxxxx@cluster0.dhldb.mongodb.net/booking",
-    options
-  )
+  .connect(process.env.MONGO_DATABASE_URL, { autoIndex: false })
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(`${err}`));
+  .catch((err) => console.log(`${err}`))
 mongoose.Promise = global.Promise
 mongoose.set("debug", true)
 

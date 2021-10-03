@@ -2,25 +2,14 @@ const express = require("express");
 const router = express.Router();
 const mongoStoreController = require("../controllers/storeController");
 
-const {
-  createStoreValidationRules,
-  updateStoreValidationRules,
-  validate,
-} = require("../middlewares/userValidationRules.js");
-
-router.post(
+router.get(
   "/mongo/store",
-  createStoreValidationRules(),
-  validate,
-  mongoStoreController.createStore
+  mongoStoreController.getStore
 );
-router.put(
-  "/mongo/store",
-  updateStoreValidationRules(),
-  validate,
-  mongoStoreController.updateStore
+router.get(
+  "/mongo/roles",
+  mongoUserController.listRoleWithUser
 );
-router.get("/mongo/storeList", mongoStoreController.getStoreList);
-router.get("/mongo/storeDetail", mongoStoreController.getStoreDetail);
 
+router.get("/mongo/users",  mongoUserController.listUser);
 module.exports = router;

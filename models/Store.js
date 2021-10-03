@@ -30,7 +30,7 @@ const ColorSchema = new Schema({
 });
 
 const DayOffSchema = new Schema({
-  id: { type: Number },
+  id: { type: Number, index: true, unique: false, required: false },
   startDate: { type: String },
   endDate: { type: String },
   description: { type: String },
@@ -138,10 +138,6 @@ StoreSchema.pre("save", (next) => {
   next();
 });
 
-StoreSchema.methods = {};
 
-StoreSchema.statics = {
-
-};
 
 module.exports = mongoose.model("Store", StoreSchema);
